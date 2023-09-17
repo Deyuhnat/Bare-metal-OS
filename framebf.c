@@ -418,17 +418,38 @@ void drawString(int x, int y, char *s, unsigned char attr)
 
 void drawOnScreen()
 {
-	int wid = 120;
+    // Constants to make positioning clearer and more adaptable
+    const int TITLE_Y = 200;
+    const int LINE_Y = TITLE_Y + 20;
+    const int START_Y = LINE_Y + 30;
+    const int LINE_SPACING = 25;
+    const int CIRCLE_RADIUS_LARGE = 250;
+    const int CIRCLE_RADIUS_SMALL = 30;
 
-	drawString(SCR_WIDTH / 2 - 70, 200, "BARE METAL OS PROJECT OF GROUP 26", 0xd);
-	drawLine(SCR_WIDTH / 2 - 80, 220, SCR_WIDTH / 2 + 80, 220, 0x0f);
+    // Centering strings on the screen
+    int centerPosition(int strLength)
+    {
+        // Assuming a character takes up about 10 pixels in width (modify this if different)
+        int estimatedStrWidth = strLength * 10;
+        return (SCR_WIDTH - estimatedStrWidth) / 2;
+    }
 
-	drawString(SCR_WIDTH / 2 - wid, 250, "Programming       Doan Hoang Anh", 0xa);
-	drawString(SCR_WIDTH / 2 - wid, 275, "                  Nguyen Tan Huy", 0x6);
-	drawString(SCR_WIDTH / 2 - wid, 300, "                  Vu Viet Minh", 0x2);
-	drawString(SCR_WIDTH / 2 - 50, 340, "                  Nguyen Nam Vinh", 0x05);
+    // Draw title and underline
+    drawString(centerPosition(strlen("PROJECT OF GROUP 26")), TITLE_Y, "PROJECT OF GROUP 26", 0xd);
+    drawLine(centerPosition(strlen("PROJECT OF GROUP 26")) - 10, LINE_Y, centerPosition(strlen("PROJECT OF GROUP 26")) + strlen("PROJECT OF GROUP 26") * 10 + 10, LINE_Y, 0x0f);
 
-	drawCircle(1024, 700, 250, 0x09, 0);
-	drawCircle(0, 0, 30, 0x69, 1);
-	
+    // Draw group members with role
+    drawString(centerPosition(strlen("Programming:               ")), START_Y, "Programming:", 0x7);
+    drawString(centerPosition(strlen("Programming:               ")) + strlen("Programming") * 10 + 10, START_Y, "Doan Hoang Anh", 0xa);
+
+    drawString(centerPosition(strlen("Programming:               ")) + strlen("Programming") * 10 + 10, START_Y + LINE_SPACING, "Nguyen Tan Huy", 0x6);
+
+    drawString(centerPosition(strlen("Programming:               ")) + strlen("Programming") * 10 + 10, START_Y + 2 * LINE_SPACING, "Vu Viet Minh", 0x2);
+
+    drawString(centerPosition(strlen("Programming:               ")) + strlen("Programming") * 10 + 10, START_Y + 3 * LINE_SPACING, "Nguyen Nam Vinh", 0x6);
+
+    // Draw Circles
+    drawCircle(SCR_WIDTH / 2, SCR_HEIGHT / 2, CIRCLE_RADIUS_LARGE, 0x09, 0);  // Centered large circle
 }
+
+

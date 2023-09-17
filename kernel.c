@@ -6,7 +6,6 @@
 #include "framebf.h"
 #include "image.h"
 #include "video.h"
-#include "font.h"
 
 #define MAX_CMD_SIZE 100
 #define MAX_HISTORY 10
@@ -450,21 +449,25 @@ void execute_command(char *cmd)
     }
     else if (strcmp(cmd, "showimage") == 0)
     {
+        clearScreen(0);
         // framebf_init(1024, 720);
         drawImage(image1image1, 0, 0, 480, 270);
     }
     else if (strcmp(cmd, "showlargeimage") == 0)
     {
+        clearScreen(0);
         // framebf_init(1024, 720);
         drawLargeImageScroll();
     }
     else if (strcmp(cmd, "showvideo") == 0)
     {
+        clearScreen(0); 
         // framebf_init(1024, 720);
         playVideo();
     }
     else if (strcmp(cmd, "displaytext") == 0)
     {
+        clearScreen(0);
         drawOnScreen();
     }
 
@@ -651,6 +654,7 @@ void main()
     setcolor("red", "black");
     uart_puts(welcome_message);
     display_prompt();
+    drawOnScreen();
 
     while (1)
     {
