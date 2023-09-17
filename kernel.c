@@ -40,15 +40,14 @@ char *welcome_message =
     "  ## ##  ###### ######  ####   ####  #    # ######      #    ####  \n"
     "\n"
     "\n"
-    "    #                     #######  #####  \n"
-    "   # #   #    # #    #    #     # #     # \n"
-    "  #   #  ##   # #    #    #     # #       \n"
-    " #     # # #  # ######    #     #  #####  \n"
-    " ####### #  # # #    #    #     #       # \n"
-    " #     # #   ## #    #    #     # #     # \n"
-    " #     # #    # #    #    #######  #####  \n"
+    " d888b  d8888b.  .d88b.  db    db d8888b.    .d88b.  .d8888.\n"
+    "88' Y8b 88  `8D .8P  Y8. 88    88 88  `8D   .8P  Y8. 88'  YP\n"
+    "88      88oobY' 88    88 88    88 88oodD'   88    88 `8bo.   \n"
+    "88  ooo 88`8b   88    88 88    88 88~~~     88    88   `Y8b. \n"
+    "88. ~8~ 88 `88. `8b  d8' 88b  d88 88        `8b  d8' db   8D \n"
+    " Y888P  88   YD  `Y88P'  ~Y8888P' 88         `Y88P'  `8888Y' \n"
     "\n"
-    "Developed by Doan Hoang Anh - s3880604\n"
+    "Developed by Group 26\n"
     "\n";
 
 char *commands[] = {
@@ -389,7 +388,7 @@ void wait_ms(unsigned int n)
 }
 void display_prompt()
 {
-    uart_puts("AnhDoanOS> ");
+    uart_puts("GroupOS> ");
 }
 void execute_command(char *cmd)
 {
@@ -545,8 +544,8 @@ void cli()
                     strcpy(cli_buffer, commands[i]);
                     index = strlen(cli_buffer);
 
-                    uart_puts("\rAnhDoanOS>                                                                                            "); // Clear line
-                    uart_puts("\rAnhDoanOS> ");
+                    uart_puts("\rGroupOS>                                                                                            "); // Clear line
+                    uart_puts("\rGroupOS> ");
                     uart_puts(cli_buffer); // print the entire buffer, including the auto-completed part
 
                     break;
@@ -564,8 +563,8 @@ void cli()
             current_index = (current_index - 1 + MAX_HISTORY) % MAX_HISTORY;
             strcpy(cli_buffer, cmd_history[current_index]);
             index = strlen(cli_buffer);
-            uart_puts("\rAnhDoanOS>                                                                                                   ");
-            uart_puts("\rAnhDoanOS> ");
+            uart_puts("\rGroupOS>                                                                                                   ");
+            uart_puts("\rGroupOS> ");
             uart_puts(cli_buffer);
         }
         // History DOWN
@@ -582,8 +581,8 @@ void cli()
                 strcpy(cli_buffer, cmd_history[current_index]);
             }
             index = strlen(cli_buffer);
-            uart_puts("\rAnhDoanOS>                                                                                                   "); // Clear line
-            uart_puts("\rAnhDoanOS> ");
+            uart_puts("\rGroupOS>                                                                                                   "); // Clear line
+            uart_puts("\rGroupOS> ");
             uart_puts(cli_buffer);
         }
         else if (c == 0x08 || c == 0x7F) // ASCII for backspace key and del key
@@ -593,13 +592,13 @@ void cli()
                 index = index - 1;
                 cli_buffer[index] = '\0';                                                                                                // "delete" the last character in the buffer
                 uart_puts("\b \b");                                                                                                      // echo backspace, space, backspace to terminal
-                uart_puts("\rAnhDoanOS>                                                                                              "); // Clear the line
-                uart_puts("\rAnhDoanOS> ");
+                uart_puts("\rGroupOS>                                                                                              "); // Clear the line
+                uart_puts("\rGroupOS> ");
                 uart_puts(cli_buffer);
             }
             else
             {
-                uart_puts("\rAnhDoanOS> "); // prevent delete through display prompt
+                uart_puts("\rGroupOS> "); // prevent delete through display prompt
             }
         }
         else if (c != '\n')
