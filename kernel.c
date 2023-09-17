@@ -6,6 +6,7 @@
 #include "framebf.h"
 #include "image.h"
 #include "video.h"
+#include "font.h"
 
 #define MAX_CMD_SIZE 100
 #define MAX_HISTORY 10
@@ -20,6 +21,8 @@ char *strtok(char *str, const char *delim);
 int strspn(const char *str, const char *set);
 int strcspn(const char *str, const char *set);
 char *strchr(const char *str, int c);
+int convert(char s[]);
+
 
 char *welcome_message =
     "####### ####### ####### #######  #####  #        #####    ###   \n"
@@ -386,6 +389,7 @@ void wait_ms(unsigned int n)
                      : "=r"(r));
     } while (r < t);
 }
+
 void display_prompt()
 {
     uart_puts("GroupOS> ");
@@ -446,18 +450,22 @@ void execute_command(char *cmd)
     }
     else if (strcmp(cmd, "showimage") == 0)
     {
-        //framebf_init(1024, 720);
+        // framebf_init(1024, 720);
         drawImage(image1image1, 0, 0, 480, 270);
     }
     else if (strcmp(cmd, "showlargeimage") == 0)
     {
-        //framebf_init(1024, 720);
+        // framebf_init(1024, 720);
         drawLargeImageScroll();
     }
     else if (strcmp(cmd, "showvideo") == 0)
     {
-        //framebf_init(1024, 720);
+        // framebf_init(1024, 720);
         playVideo();
+    }
+    else if (strcmp(cmd, "displaytext") == 0)
+    {
+        drawOnScreen();
     }
 
     else if (strcmp(cmd, commands[1]) == 0)
@@ -590,8 +598,8 @@ void cli()
             if (index > 0) // check there are characters to delete
             {
                 index = index - 1;
-                cli_buffer[index] = '\0';                                                                                                // "delete" the last character in the buffer
-                uart_puts("\b \b");                                                                                                      // echo backspace, space, backspace to terminal
+                cli_buffer[index] = '\0';                                                                                              // "delete" the last character in the buffer
+                uart_puts("\b \b");                                                                                                    // echo backspace, space, backspace to terminal
                 uart_puts("\rGroupOS>                                                                                              "); // Clear the line
                 uart_puts("\rGroupOS> ");
                 uart_puts(cli_buffer);
@@ -767,4 +775,14 @@ char *strchr(const char *str, int c)
         return (char *)str;
     }
     return NULL;
+}
+
+int convert(char s[])
+{
+    int i, n = 0;
+
+    for (i = 0; s[i] >= '0' && s[i] <= '9'; i++)
+        n = 10 * n + (s[i] - '0');
+
+    return n;
 }

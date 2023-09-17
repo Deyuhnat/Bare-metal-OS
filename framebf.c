@@ -19,9 +19,7 @@ unsigned int width, height, pitch;
 * (declare as pointer of unsigned char to access each byte) */
 unsigned char *fb;
 
-/**
-* Set physical screen resolution
-*/
+
 void physical_framebf_init(int w, int h)
 {
 	mbox[0] = 35 * 4; // Length of message in bytes
@@ -422,15 +420,13 @@ void drawOnScreen()
 {
 	int wid = 120;
 
-	// drawString(100, 100, "Hello world! :3", 0x05);
-
-	drawString(SCR_WIDTH / 2 - 70, 200, "Team ONE MAN BAND", 0xd);
+	drawString(SCR_WIDTH / 2 - 70, 200, "BARE METAL OS PROJECT OF GROUP 26", 0xd);
 	drawLine(SCR_WIDTH / 2 - 80, 220, SCR_WIDTH / 2 + 80, 220, 0x0f);
 
-	drawString(SCR_WIDTH / 2 - wid, 250, "Programming       Nguyen Quoc Hoang", 0xa);
-	drawString(SCR_WIDTH / 2 - wid, 275, "  Designing       Hoang Nguyen", 0x6);
-	drawString(SCR_WIDTH / 2 - wid, 300, "    Testing       Quoc Hoang", 0x2);
-	drawString(SCR_WIDTH / 2 - 50, 340, "- s3697305 -", 0x05);
+	drawString(SCR_WIDTH / 2 - wid, 250, "Programming       Doan Hoang Anh", 0xa);
+	drawString(SCR_WIDTH / 2 - wid, 275, "                  Nguyen Tan Huy", 0x6);
+	drawString(SCR_WIDTH / 2 - wid, 300, "                  Vu Viet Minh", 0x2);
+	drawString(SCR_WIDTH / 2 - 50, 340, "                  Nguyen Nam Vinh", 0x05);
 
 	drawCircle(1024, 700, 250, 0x09, 0);
 	drawCircle(0, 0, 30, 0x69, 1);
